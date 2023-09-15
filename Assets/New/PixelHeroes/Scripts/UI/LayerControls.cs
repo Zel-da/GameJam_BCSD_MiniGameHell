@@ -25,7 +25,7 @@ namespace Assets.PixelHeroes.Scripts.UI
         {
             foreach (var button in FixedColors.GetComponentsInChildren<Button>())
             {
-                //button.onClick.AddListener(() => SelectFixedColor(button.targetGraphic.color));
+                button.onClick.AddListener(() => SelectFixedColor(button.targetGraphic.color));
             }
 
             var onPointerUp = new EventTrigger.Entry { eventID = EventTriggerType.PointerUp };

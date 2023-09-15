@@ -46,10 +46,10 @@ namespace Assets.PixelHeroes.Scripts.EditorScripts
                     layer.Controls.Dropdown.value = -1;
                     layer.Controls.Dropdown.value = layer.Index + (layer.CanBeEmpty ? 1 : 0);
                     layer.Controls.Dropdown.onValueChanged.AddListener(value => SetIndex(layer, value));
-                    //layer.Controls.Prev.onClick.AddListener(() => Switch(layer, -1));
-                    //layer.Controls.Next.onClick.AddListener(() => Switch(layer, +1));
-                    //layer.Controls.Hide.onClick.AddListener(() => Hide(layer));
-                    //layer.Controls.Paint.onClick.AddListener(() => Paint(layer));
+                    layer.Controls.Prev.onClick.AddListener(() => Switch(layer, -1));
+                    layer.Controls.Next.onClick.AddListener(() => Switch(layer, +1));
+                    layer.Controls.Hide.onClick.AddListener(() => Hide(layer));
+                    layer.Controls.Paint.onClick.AddListener(() => Paint(layer));
                     layer.Controls.Hue.onValueChanged.AddListener(value => Rebuild(layer));
                     layer.Controls.Saturation.onValueChanged.AddListener(value => Rebuild(layer));
                     layer.Controls.Brightness.onValueChanged.AddListener(value => Rebuild(layer));

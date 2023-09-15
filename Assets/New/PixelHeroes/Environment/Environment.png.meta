@@ -1077,7 +1077,7 @@ TextureImporter:
     nameFileIdTable:
       GroundGrassTile2: -446867404522521166
       IceTile2: 2748799819732492174
-      Plate1: -1812239924292666704
+      Plate4: 6521106915325849606
       WaterTile: -2994877863233710035
       IceTile1: 3062189330265537062
       Chest2: 6624564900204519675
@@ -1112,7 +1112,7 @@ TextureImporter:
       Inner3: -420011917627683574
       LadderTile: 9048288764117043530
       Pointer2: 6704674279086497085
-      Plate4: 6521106915325849606
+      Plate1: -1812239924292666704
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
