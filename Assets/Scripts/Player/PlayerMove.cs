@@ -20,6 +20,8 @@ public class PlayerMove : MonoBehaviour
     bool canMove = true;
 
     Vector3 moveVelocity = Vector3.zero;
+    public GameObject A;
+    public GameObject targetObject; // ?? ??? ?? ????
 
     private void Awake()
     {
@@ -33,15 +35,15 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         if (isPass)
-            keyActivate(); // 방향키 활성화
+            keyActivate(); // ?????? ??????
         
         if (canMove)
-            Move(); // 이동 가능
+            Move(); // ???? ????
     }
 
     void keyActivate()
     {
-        // 방향키 입력
+        // ?????? ????
         if (Input.GetAxisRaw("Horizontal") < 0)
         {
             toLeft = true;
@@ -77,18 +79,18 @@ public class PlayerMove : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // 양 옆 또는 사이드 콜라이더와 충돌시
         if (other.gameObject.CompareTag("obstacle"))
         {
-            Time.timeScale = 0; // 게임 종료
+            Time.timeScale = 0;
+            A.SetActive(true);
         }
 
-        // 나무 사이 콜라이더와 충돌시
         if (other.gameObject.CompareTag("ScoreUp") || other.gameObject.CompareTag("Tree"))
         {
+
             cnt++;
             passNum++;
-            isPass = true; // 방향키 활성화
+            isPass = true; // 占쏙옙占쏙옙키 활占쏙옙화
 
             if(passNum == 10)
             {
@@ -111,6 +113,7 @@ public class PlayerMove : MonoBehaviour
             else if ((passNum % 3 == 0))
             {
                 comboTxt.enabled = false;
+
             }
         }
     }
