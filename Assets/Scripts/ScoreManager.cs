@@ -7,9 +7,11 @@ public class ScoreManager : MonoBehaviour
     public float scoreIncreaseInterval = 0.1f; // 점수를 증가시키는 주기 (예: 1초마다)
     public int scoreIncreaseAmount = 10; // 점수가 증가하는 양
 
-    private int score = 0;
+    public int score = 0;
     private float timeSinceLastIncrease = 0.0f;
     private bool isScoreStopped = false;
+
+
 
     void Start()
     {

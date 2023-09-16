@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public GameObject[] objectsToActivate; // 활성화할 오브젝트들
+
     public float moveSpeed = 5.0f; // 이동 속도
     private Rigidbody2D rb;
 
@@ -13,6 +15,7 @@ public class Player : MonoBehaviour
     private bool isPaused = false;
 
     private ScoreManager scoreManager;
+
     public GameObject objectToDisable;
 
     void Start()
@@ -89,6 +92,11 @@ public class Player : MonoBehaviour
     void Pause()
     {
         Time.timeScale = 0; // 게임 시간을 멈춤
+
+        foreach (GameObject obj in objectsToActivate)
+        {
+            obj.SetActive(isPaused);
+        }
     }
 
     IEnumerator PauseAfterDelay(float delayTime)
