@@ -1,7 +1,13 @@
 using UnityEngine;
+using TMPro;
 
 public class PlayerMove : MonoBehaviour
 {
+    public GameObject particle;
+    public int passNum = 0;
+    int cnt = 0;
+    public TMP_Text comboTxt;
+
     public float movePower = 1f;
 
     bool toLeft = false;
@@ -10,13 +16,15 @@ public class PlayerMove : MonoBehaviour
     bool isPass = true;
     bool canMove = true;
 
-    public ParticleSystem particle;
     Vector3 moveVelocity = Vector3.zero;
     public GameObject A;
     public GameObject targetObject; // ?? ??? ?? ????
 
     private void Awake()
     {
+        comboTxt.enabled = false;
+        particle.SetActive(false);
+
         transform.localScale = new Vector3(-1, 1, 1);
         moveVelocity = Vector3.left;
     }
@@ -68,47 +76,40 @@ public class PlayerMove : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("obstacle"))
-        {
-            Time.timeScale = 0;
-            A.SetActive(true);
-        }
-
-        if (other.gameObject.CompareTag("ScoreUp") || other.gameObject.CompareTag("Tree"))
-        {
-            isPass = true; // ?????? ??????
-            Debug.Log("Score Up!"); // ???? ????
-        }
-
-        // ???? ?????????? ??????
         if (other.gameObject.CompareTag("Tree"))
         {
             targetObject.GetComponent<ScoreManager>().score += 10;
         }
-    }
-
-    public string targetTag = "Tree"; // 특정 태그
-    public GameObject particlePrefab; // 파티클 프리팹
-
-    private int collisionCount = 0; // 충돌 횟수
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag(targetTag))
+    
+        // 양 옆 또는 사이드 콜라이더와 충돌시
+        if (other.gameObject.CompareTag("obstacle"))
         {
-            collisionCount++;
-
-            // 특정 태그의 오브젝트에 10번 연속 접촉했을 때
-            if (collisionCount >= 10)
+            Time.timeScale = 0; // 게임 종료
+            A.SetActive(true);
+        }
+        // 나무 사이 콜라이더와 충돌시
+        if (other.gameObject.CompareTag("ScoreUp") || other.gameObject.CompareTag("Tree"))
+        {
+            cnt++;
+            passNum++;
+            isPass = true; // 방향키 활성화
+            if (passNum == 10)
             {
-                // 파티클을 생성하여 재생
-                if (particlePrefab != null)
+                comboTxt.text = cnt.ToString();
+                if (particle != null)
                 {
-                    Instantiate(particlePrefab, transform.position, Quaternion.identity);
+                    comboTxt.enabled = true;
+                    particle.SetActive(true);
                 }
-
-                // 충돌 횟수 초기화
-                collisionCount = 0;
+                passNum = 0;
+            }
+            else if ((passNum % 5 == 0))
+            {
+                particle.SetActive(false);
+            }
+            else if ((passNum % 3 == 0))
+            {
+                comboTxt.enabled = false;
             }
         }
     }
