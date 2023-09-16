@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Game1.unity
     guid: 4f328b7b20d9a42f69b921af3045f5b2
   - enabled: 1
+    path: Assets/Scenes/Doradora.unity
+    guid: 59b85fb8496d56848a1ca1b8f4f8aef8
+  - enabled: 1
     path: Assets/Scenes/Game3.unity
     guid: 1bc2f085ff4994f2593a574dc1d6e2d3
+  - enabled: 1
+    path: Assets/Scenes/Ranking.unity
+    guid: 3ac9085632de2bb4f94dd86bbe2f0f0b
   m_configObjects: {}

@@ -15,5 +15,7 @@ public class Button : MonoBehaviour
 
         // 오브젝트 비활성화
         objectToDeactivate.SetActive(false);
+
+        Time.timeScale = 1f;
     }
 }
