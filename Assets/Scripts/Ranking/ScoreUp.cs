@@ -4,8 +4,21 @@ using UnityEngine;
 
 public class ScoreUp : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D other)
+    [SerializeField] Collider2D obstacleCol;
+    [SerializeField] Collider2D obstacleCol2;
+    [SerializeField] Collider2D treeCol;
+    [SerializeField] Collider2D treeCol2;
+
+    void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Destroy(obstacleCol); // 양 옆 콜라이더 삭제
+            Destroy(obstacleCol2);
+            Destroy(treeCol); // 트리 콜라이더 삭제
+            Destroy(treeCol2);
+        }
+
         Score.score += 10;
     }
 }
