@@ -10,89 +10,62 @@ public class PlayerMove : MonoBehaviour
 
     public float movePower = 1f;
 
-    bool toLeft = false;
-    bool toRight = false;
-
     bool isPass = true;
     bool canMove = true;
 
+    int count = 1;
+
     Vector3 moveVelocity = Vector3.zero;
     public GameObject A;
-    public GameObject targetObject; // ?? ??? ?? ????
+    public GameObject targetObject;
+
+    private bool isFacingRight = true; // 플레이어가 오른쪽을 보고 있는지 여부
 
     private void Awake()
     {
         comboTxt.enabled = false;
         particle.SetActive(false);
 
-        transform.localScale = new Vector3(-1, 1, 1);
-        moveVelocity = Vector3.left;
+        // 초기 방향을 오른쪽으로 설정
+        isFacingRight = true;
+        moveVelocity = Vector3.right;
     }
 
     void Update()
     {
-        if (isPass)
-            keyActivate(); // ?????? ??????
-        
         if (canMove)
-            Move(); // ???? ????
-    }
+            Move();
 
-    void keyActivate()
-    {
-        // ?????? ????
-        if (Input.GetAxisRaw("Horizontal") < 0)
+        // 스페이스바를 눌렀을 때 좌우를 반전시키는 기능 추가
+        if (Input.GetKeyDown(KeyCode.Space) && count > 0 )
         {
-            toLeft = true;
-            toRight = false;
-            isPass = false;
-            canMove = true;
-        }
-
-        else if (Input.GetAxisRaw("Horizontal") > 0)
-        {
-            toLeft = false;
-            toRight = true;
-            isPass = false;
-            canMove = true;
+            isFacingRight = !isFacingRight;
+            transform.localScale = new Vector3(isFacingRight ? 1 : -1, 1, 1);
+            moveVelocity = isFacingRight ? Vector3.right : Vector3.left;
+            count = 1;
         }
     }
 
     void Move()
     {
-        if (toLeft) {
-            transform.localScale = new Vector3(-1, 1, 1);
-            moveVelocity = Vector3.left;
-        }
-
-        else if (toRight) {
-            transform.localScale = new Vector3(1, 1, 1);
-            moveVelocity = Vector3.right;
-        }
-
         transform.position += moveVelocity * movePower * Time.deltaTime;
     }
 
-
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Tree"))
-        {
-            targetObject.GetComponent<ScoreManager>().score += 10;
-        }
-    
-        // 양 옆 또는 사이드 콜라이더와 충돌시
         if (other.gameObject.CompareTag("obstacle"))
         {
-            Time.timeScale = 0; // 게임 종료
+            Time.timeScale = 0;
             A.SetActive(true);
         }
-        // 나무 사이 콜라이더와 충돌시
+
         if (other.gameObject.CompareTag("ScoreUp") || other.gameObject.CompareTag("Tree"))
         {
+            count++;
             cnt++;
             passNum++;
-            isPass = true; // 방향키 활성화
+            isPass = true;
+
             if (passNum == 10)
             {
                 comboTxt.text = cnt.ToString();
@@ -114,4 +87,3 @@ public class PlayerMove : MonoBehaviour
         }
     }
 }
-
