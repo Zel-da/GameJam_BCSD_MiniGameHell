@@ -2,44 +2,62 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float speed = 10f;
-    public float horizontalBound = 10f;
+    public float movePower = 1f;
+    public float delayTime = 0.3f;
+
+    bool toLeft = false;
+    bool toRight = false;
+
+    private void Awake()
+    {
+        Vector3 moveVelocity = Vector3.zero;
+    }
 
     void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        Move(horizontalInput);
-        CheckBounds();
+        Move();
     }
 
-    void Move(float horizontalInput)
+    void Move()
     {
-        Vector3 movement = new Vector3(horizontalInput * speed * Time.deltaTime, 0, 0);
-        transform.Translate(movement);
-    }
+        if(Input.GetAxisRaw("Horizontal") < 0) {
+            toLeft = true;
+            toRight = false;
+        }
 
-    void CheckBounds()
-    {
-        Vector3 currentPosition = transform.position;
-        currentPosition.x = Mathf.Clamp(currentPosition.x, -horizontalBound, horizontalBound);
-        transform.position = currentPosition;
+        else if (Input.GetAxisRaw("Horizontal") > 0) {
+            toLeft = false;
+            toRight = true;
+
+        }
+
+        Vector3 moveVelocity = Vector3.zero;
+
+        if (toLeft) {
+            transform.localScale = new Vector3(-1, 1, 1);
+            moveVelocity = Vector3.left;
+        }
+
+        else if (toRight) {
+            transform.localScale = new Vector3(1, 1, 1);
+            moveVelocity = Vector3.right;
+        }
+
+        transform.position += moveVelocity * movePower * Time.deltaTime;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        // 양 옆 또는 사이드 콜라이더와 부딪히면 게임 종료
         if (other.gameObject.CompareTag("obstacle"))
         {
-            Debug.Log("Game over!");
+            Time.timeScale = 0;
         }
 
+        // 나무 사이 콜라이더와 부딪히면 점수 증가
         if (other.gameObject.CompareTag("ScoreUp"))
         {
             Debug.Log("Score Up!");
-        }
-
-        if (other.gameObject.CompareTag("Tree"))
-        {
-            Destroy(other.gameObject);
         }
     }
 }
