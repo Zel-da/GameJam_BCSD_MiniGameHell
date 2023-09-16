@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public float movePower = 1f;
-    public float delayTime = 0.3f;
 
     bool toLeft = false;
     bool toRight = false;
@@ -11,9 +10,13 @@ public class PlayerMove : MonoBehaviour
     bool isPass = true;
     bool canMove = true;
 
+    public ParticleSystem particle;
+    Vector3 moveVelocity = Vector3.zero;
+
     private void Awake()
     {
-        Vector3 moveVelocity = Vector3.zero;
+        transform.localScale = new Vector3(-1, 1, 1);
+        moveVelocity = Vector3.left;
     }
 
     void Update()
@@ -47,8 +50,6 @@ public class PlayerMove : MonoBehaviour
 
     void Move()
     {
-        Vector3 moveVelocity = Vector3.zero;
-
         if (toLeft) {
             transform.localScale = new Vector3(-1, 1, 1);
             moveVelocity = Vector3.left;
@@ -76,6 +77,12 @@ public class PlayerMove : MonoBehaviour
         {
             isPass = true; // 방향키 활성화
             Debug.Log("Score Up!"); // 점수 증가
+        }
+
+        // 나무 콜라이더와 충돌시
+        if (other.gameObject.CompareTag("ScoreUp") || other.gameObject.CompareTag("Tree"))
+        {
+            // 파티클 재생
         }
     }
 }

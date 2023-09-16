@@ -4,7 +4,8 @@ using UnityEngine;
 public class BackgroundLoop : MonoBehaviour
 {
     private MeshRenderer render;
-    public float speed;
+
+    public float speed = 4;
     private float offset;
     void Start()
     {

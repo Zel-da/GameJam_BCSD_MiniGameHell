@@ -11,4 +11,5 @@ public class Move : MonoBehaviour
     {
         transform.position += Vector3.up * speed * Time.deltaTime; // 한 프레임이 지날 때마다 위쪽으로 이동
     }
+
 }
