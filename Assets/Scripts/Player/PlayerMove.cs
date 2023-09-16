@@ -1,8 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerMove : MonoBehaviour
 {
     public float movePower = 1f;
+    private int passNum = 0;
+
+    public GameObject particle;
+    public TMP_Text comboTxt;
+    private int cnt = 0;
 
     bool toLeft = false;
     bool toRight = false;
@@ -10,11 +19,13 @@ public class PlayerMove : MonoBehaviour
     bool isPass = true;
     bool canMove = true;
 
-    public ParticleSystem particle;
     Vector3 moveVelocity = Vector3.zero;
 
     private void Awake()
     {
+        comboTxt.enabled = false;
+        particle.SetActive(false);
+
         transform.localScale = new Vector3(-1, 1, 1);
         moveVelocity = Vector3.left;
     }
@@ -75,14 +86,32 @@ public class PlayerMove : MonoBehaviour
         // 나무 사이 콜라이더와 충돌시
         if (other.gameObject.CompareTag("ScoreUp") || other.gameObject.CompareTag("Tree"))
         {
+            cnt++;
+            passNum++;
             isPass = true; // 방향키 활성화
-            Debug.Log("Score Up!"); // 점수 증가
-        }
 
-        // 나무 콜라이더와 충돌시
-        if (other.gameObject.CompareTag("ScoreUp") || other.gameObject.CompareTag("Tree"))
-        {
-            // 파티클 재생
+            if(passNum == 10)
+            {
+                comboTxt.text = cnt.ToString();
+
+                if (particle != null)
+                {
+                    comboTxt.enabled = true;
+                    particle.SetActive(true);
+                }
+
+                passNum = 0;            
+            }
+
+            else if((passNum % 5 == 0))
+            {
+                particle.SetActive(false);
+            }
+
+            else if ((passNum % 3 == 0))
+            {
+                comboTxt.enabled = false;
+            }
         }
     }
 }

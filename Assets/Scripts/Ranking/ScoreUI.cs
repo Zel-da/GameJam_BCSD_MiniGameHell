@@ -10,12 +10,6 @@ public class ScoreUI : MonoBehaviour
 
     void Start()
     {
-        scoresManager.AddScore(new Scores(scores: 1));
-        scoresManager.AddScore(new Scores(scores: 2));
-        scoresManager.AddScore(new Scores(scores: 3));
-        scoresManager.AddScore(new Scores(scores: 4));
-        scoresManager.AddScore(new Scores(scores: 5));
-
         var theScores = scoresManager.GetHighScores().ToArray();
         for (int i = 0; i < 5; i++)
         {

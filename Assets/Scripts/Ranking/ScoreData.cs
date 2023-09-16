@@ -7,7 +7,7 @@ public class ScoreData
 {
     public List<Scores> theScores;
     
-    void ScoreDatas()
+    public void ScoreDatas()
     {
         theScores = new List <Scores>();
     }
