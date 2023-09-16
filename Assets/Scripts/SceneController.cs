@@ -11,5 +11,6 @@ public class SceneController : MonoBehaviour
     public void OnClick()
     {
         SceneManager.LoadScene(nextSceneName); // 다음 씬으로 전환
+        Time.timeScale = 1;
     }
 }

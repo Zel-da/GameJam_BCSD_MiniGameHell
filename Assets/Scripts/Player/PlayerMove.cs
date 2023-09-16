@@ -12,6 +12,8 @@ public class PlayerMove : MonoBehaviour
 
     public ParticleSystem particle;
     Vector3 moveVelocity = Vector3.zero;
+    public GameObject A;
+    public GameObject targetObject; // ?? ??? ?? ????
 
     private void Awake()
     {
@@ -22,15 +24,15 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         if (isPass)
-            keyActivate(); // ¹æÇâÅ° È°¼ºÈ­
+            keyActivate(); // ?????? ??????
         
         if (canMove)
-            Move(); // ÀÌµ¿ °¡´É
+            Move(); // ???? ????
     }
 
     void keyActivate()
     {
-        // ¹æÇâÅ° ÀÔ·Â
+        // ?????? ????
         if (Input.GetAxisRaw("Horizontal") < 0)
         {
             toLeft = true;
@@ -66,23 +68,48 @@ public class PlayerMove : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // ¾ç ¿· ¶Ç´Â »çÀÌµå Äİ¶óÀÌ´õ¿Í Ãæµ¹½Ã
         if (other.gameObject.CompareTag("obstacle"))
         {
-            Time.timeScale = 0; // °ÔÀÓ Á¾·á
+            Time.timeScale = 0;
+            A.SetActive(true);
         }
 
-        // ³ª¹« »çÀÌ Äİ¶óÀÌ´õ¿Í Ãæµ¹½Ã
         if (other.gameObject.CompareTag("ScoreUp") || other.gameObject.CompareTag("Tree"))
         {
-            isPass = true; // ¹æÇâÅ° È°¼ºÈ­
-            Debug.Log("Score Up!"); // Á¡¼ö Áõ°¡
+            isPass = true; // ?????? ??????
+            Debug.Log("Score Up!"); // ???? ????
         }
 
-        // ³ª¹« Äİ¶óÀÌ´õ¿Í Ãæµ¹½Ã
-        if (other.gameObject.CompareTag("ScoreUp") || other.gameObject.CompareTag("Tree"))
+        // ???? ?????????? ??????
+        if (other.gameObject.CompareTag("Tree"))
         {
-            // ÆÄÆ¼Å¬ Àç»ı
+            targetObject.GetComponent<ScoreManager>().score += 10;
+        }
+    }
+
+    public string targetTag = "Tree"; // íŠ¹ì • íƒœê·¸
+    public GameObject particlePrefab; // íŒŒí‹°í´ í”„ë¦¬íŒ¹
+
+    private int collisionCount = 0; // ì¶©ëŒ íšŸìˆ˜
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag(targetTag))
+        {
+            collisionCount++;
+
+            // íŠ¹ì • íƒœê·¸ì˜ ì˜¤ë¸Œì íŠ¸ì— 10ë²ˆ ì—°ì† ì ‘ì´‰í–ˆì„ ë•Œ
+            if (collisionCount >= 10)
+            {
+                // íŒŒí‹°í´ì„ ìƒì„±í•˜ì—¬ ì¬ìƒ
+                if (particlePrefab != null)
+                {
+                    Instantiate(particlePrefab, transform.position, Quaternion.identity);
+                }
+
+                // ì¶©ëŒ íšŸìˆ˜ ì´ˆê¸°í™”
+                collisionCount = 0;
+            }
         }
     }
 }
