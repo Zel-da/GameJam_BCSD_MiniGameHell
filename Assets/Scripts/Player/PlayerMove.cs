@@ -8,10 +8,13 @@ public class PlayerMove : MonoBehaviour
 {
     public float movePower = 1f;
     private int passNum = 0;
+<<<<<<< Updated upstream
 
     public GameObject particle;
     public TMP_Text comboTxt;
     private int cnt = 0;
+=======
+>>>>>>> Stashed changes
 
     bool toLeft = false;
     bool toRight = false;
@@ -21,7 +24,14 @@ public class PlayerMove : MonoBehaviour
 
     Vector3 moveVelocity = Vector3.zero;
     public GameObject A;
-    public GameObject targetObject; // ?? ??? ?? ????
+    public GameObject targetObject;
+
+
+    public GameObject particle;
+    public TMP_Text comboTxt;
+    private int cnt = 0;
+
+    public GameObject AS;
 
     private void Awake()
     {
@@ -81,12 +91,13 @@ public class PlayerMove : MonoBehaviour
     {
         if (other.gameObject.CompareTag("obstacle"))
         {
-            Time.timeScale = 0;
-            A.SetActive(true);
+            AS.SetActive(true);
+            Time.timeScale = 0; // 게임 종료
         }
-
+        // 나무 사이 콜라이더와 충돌시
         if (other.gameObject.CompareTag("ScoreUp") || other.gameObject.CompareTag("Tree"))
         {
+<<<<<<< Updated upstream
 
             cnt++;
             passNum++;
@@ -96,11 +107,20 @@ public class PlayerMove : MonoBehaviour
             {
                 comboTxt.text = cnt.ToString();
 
+=======
+            cnt++;
+            passNum++;
+            isPass = true; // 방향키 활성화
+            if (passNum == 10)
+            {
+                comboTxt.text = cnt.ToString();
+>>>>>>> Stashed changes
                 if (particle != null)
                 {
                     comboTxt.enabled = true;
                     particle.SetActive(true);
                 }
+<<<<<<< Updated upstream
 
                 passNum = 0;            
             }
@@ -114,6 +134,17 @@ public class PlayerMove : MonoBehaviour
             {
                 comboTxt.enabled = false;
 
+=======
+                passNum = 0;
+            }
+            else if ((passNum % 5 == 0))
+            {
+                particle.SetActive(false);
+            }
+            else if ((passNum % 3 == 0))
+            {
+                comboTxt.enabled = false;
+>>>>>>> Stashed changes
             }
         }
     }
