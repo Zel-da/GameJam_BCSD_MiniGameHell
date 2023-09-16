@@ -19,6 +19,14 @@ public class ScoreUp : MonoBehaviour
             Destroy(treeCol2);
         }
 
-        Score.score += 10;
+        if (other.gameObject.CompareTag("ScoreUp"))
+        {
+            Score.score += 10;
+        }
+
+        if (other.gameObject.CompareTag("Tree"))
+        {
+            Score.score += 50;
+        }
     }
 }

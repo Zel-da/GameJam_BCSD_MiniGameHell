@@ -1,8 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerMove : MonoBehaviour
 {
     public float movePower = 1f;
+    private int passNum = 0;
+
+    public GameObject particle;
+    public TMP_Text comboTxt;
+    private int cnt = 0;
 
     bool toLeft = false;
     bool toRight = false;
@@ -10,13 +19,15 @@ public class PlayerMove : MonoBehaviour
     bool isPass = true;
     bool canMove = true;
 
-    public ParticleSystem particle;
     Vector3 moveVelocity = Vector3.zero;
     public GameObject A;
     public GameObject targetObject; // ?? ??? ?? ????
 
     private void Awake()
     {
+        comboTxt.enabled = false;
+        particle.SetActive(false);
+
         transform.localScale = new Vector3(-1, 1, 1);
         moveVelocity = Vector3.left;
     }
@@ -76,39 +87,33 @@ public class PlayerMove : MonoBehaviour
 
         if (other.gameObject.CompareTag("ScoreUp") || other.gameObject.CompareTag("Tree"))
         {
-            isPass = true; // ?????? ??????
-            Debug.Log("Score Up!"); // ???? ????
-        }
 
-        // ???? ?????????? ??????
-        if (other.gameObject.CompareTag("Tree"))
-        {
-            targetObject.GetComponent<ScoreManager>().score += 10;
-        }
-    }
+            cnt++;
+            passNum++;
+            isPass = true; // ����Ű Ȱ��ȭ
 
-    public string targetTag = "Tree"; // 특정 태그
-    public GameObject particlePrefab; // 파티클 프리팹
-
-    private int collisionCount = 0; // 충돌 횟수
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag(targetTag))
-        {
-            collisionCount++;
-
-            // 특정 태그의 오브젝트에 10번 연속 접촉했을 때
-            if (collisionCount >= 10)
+            if(passNum == 10)
             {
-                // 파티클을 생성하여 재생
-                if (particlePrefab != null)
+                comboTxt.text = cnt.ToString();
+
+                if (particle != null)
                 {
-                    Instantiate(particlePrefab, transform.position, Quaternion.identity);
+                    comboTxt.enabled = true;
+                    particle.SetActive(true);
                 }
 
-                // 충돌 횟수 초기화
-                collisionCount = 0;
+                passNum = 0;            
+            }
+
+            else if((passNum % 5 == 0))
+            {
+                particle.SetActive(false);
+            }
+
+            else if ((passNum % 3 == 0))
+            {
+                comboTxt.enabled = false;
+
             }
         }
     }

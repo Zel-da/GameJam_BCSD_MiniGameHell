@@ -548,12 +548,14 @@ Transform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1694611518
+
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+
     - target: {fileID: 1121947431103018423, guid: c90b0f6ab7cc10646b418cfa23338111, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -582,6 +584,7 @@ PrefabInstance:
       propertyPath: m_CellSize.y
       value: 45
       objectReference: {fileID: 0}
+
     - target: {fileID: 1121947431197771947, guid: c90b0f6ab7cc10646b418cfa23338111, type: 3}
       propertyPath: scoresManager
       value: 
@@ -674,6 +677,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+
     - target: {fileID: 1121947432865854774, guid: c90b0f6ab7cc10646b418cfa23338111, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -742,6 +746,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSceneName: Main
+
 --- !u!1 &2034122835
 GameObject:
   m_ObjectHideFlags: 0
