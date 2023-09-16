@@ -10,7 +10,8 @@ TagManager:
   - Hit
   - obstacle
   - ScoreUp
-  - Tree
+  - Target
+
   layers:
   - Default
   - TransparentFX
