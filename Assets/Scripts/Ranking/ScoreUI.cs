@@ -10,15 +10,17 @@ public class ScoreUI : MonoBehaviour
 
     void Start()
     {
-        scoresManager.AddScore(new Scores(names: "user1", scores: 0));
-        scoresManager.AddScore(new Scores(names: "user2", scores: 0));
+        scoresManager.AddScore(new Scores(scores: 1));
+        scoresManager.AddScore(new Scores(scores: 2));
+        scoresManager.AddScore(new Scores(scores: 3));
+        scoresManager.AddScore(new Scores(scores: 4));
+        scoresManager.AddScore(new Scores(scores: 5));
 
         var theScores = scoresManager.GetHighScores().ToArray();
-        for (int i = 0; i < theScores.Length; i++)
+        for (int i = 0; i < 5; i++)
         {
             var row = Instantiate(rowUI, transform).GetComponent<RowUI>();
             row.ranks.text = (i + 1).ToString();
-            row.names.text = theScores[i].names;
             row.scores.text = theScores[i].scores.ToString();
         }
     }

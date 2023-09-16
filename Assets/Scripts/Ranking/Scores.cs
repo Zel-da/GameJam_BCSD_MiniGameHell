@@ -5,12 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class Scores
 {
-    public string names;
     public float scores;
 
-    public Scores(string names, float scores)
+    public Scores (float scores)
     {
-        this.names = names;
         this.scores = scores;
     }
 }
