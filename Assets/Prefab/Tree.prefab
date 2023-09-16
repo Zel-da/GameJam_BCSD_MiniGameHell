@@ -45,9 +45,10 @@ GameObject:
   - component: {fileID: 7592483314735033822}
   - component: {fileID: 7592483314735033821}
   - component: {fileID: 1944151557}
+  - component: {fileID: 5486575554207286649}
   m_Layer: 0
   m_Name: Snowtree
-  m_TagString: ScoreUp
+  m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -182,6 +183,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5486575554207286649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7592483314735033819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6ae16e631c0d647acd4abfd6db955c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleCol: {fileID: 7592483316186117107}
 --- !u!1 &7592483314922103180
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,9 +279,10 @@ GameObject:
   - component: {fileID: 7592483315056897711}
   - component: {fileID: 7592483315056897710}
   - component: {fileID: 1553046173}
+  - component: {fileID: 2106258352087131430}
   m_Layer: 0
   m_Name: Snowtree (1)
-  m_TagString: ScoreUp
+  m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -402,6 +417,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2106258352087131430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7592483315056897708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6ae16e631c0d647acd4abfd6db955c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleCol: {fileID: 7592483315807477195}
 --- !u!1 &7592483315807477193
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,7 +475,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 8.1, y: -0.1}
+  m_Offset: {x: 8.5, y: -0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -458,7 +486,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 12, y: 0.5}
+  m_Size: {x: 12, y: 0.2}
   m_EdgeRadius: 0
 --- !u!1 &7592483315958494315
 GameObject:
@@ -508,7 +536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec9ff3e58cc7394e87a70a4b3418ab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 4
 --- !u!1 &7592483316186117105
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,7 +582,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -8.1, y: -0.1}
+  m_Offset: {x: -8.5, y: -0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -565,5 +593,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 12, y: 0.5}
+  m_Size: {x: 12, y: 0.2}
   m_EdgeRadius: 0
