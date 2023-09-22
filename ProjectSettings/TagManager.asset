@@ -11,7 +11,8 @@ TagManager:
   - obstacle
   - ScoreUp
   - Target
-
+  - Tree
+  - TreeObject
   layers:
   - Default
   - TransparentFX
